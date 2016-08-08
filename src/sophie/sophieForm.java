@@ -259,27 +259,29 @@ public class sophieForm extends javax.swing.JFrame {
                 && !TextField_JmlOrder.getText().isEmpty()){
             String [] columnNames = {"Kode Konter","Kode Barang","Nama Barang", "Jumlah", "Sisa Stok"};
             TableModel model_viewdata = new DefaultTableModel (columnNames, Table_Order.getModel().getRowCount() + 1);
-            for (int i = 0; i < Table_Order.getModel().getRowCount(); i ++){
-                model_viewdata.setValueAt(Table_Order.getModel().getValueAt(i, 0),i,0);
-                model_viewdata.setValueAt(Table_Order.getModel().getValueAt(i, 1),i,1);
-                model_viewdata.setValueAt(Table_Order.getModel().getValueAt(i, 2),i,2);
-                model_viewdata.setValueAt(Table_Order.getModel().getValueAt(i, 3),i,3);
-                model_viewdata.setValueAt(Table_Order.getModel().getValueAt(i, 4),i,4);
+            for (int i = model_viewdata.getRowCount() - 1; i > 0; i --){
+                model_viewdata.setValueAt(Table_Order.getModel().getValueAt(i - 1, 0), i, 0);
+                model_viewdata.setValueAt(Table_Order.getModel().getValueAt(i - 1, 1), i, 1);
+                model_viewdata.setValueAt(Table_Order.getModel().getValueAt(i - 1, 2), i, 2);
+                model_viewdata.setValueAt(Table_Order.getModel().getValueAt(i - 1, 3), i, 3);
+                model_viewdata.setValueAt(Table_Order.getModel().getValueAt(i - 1, 4), i, 4);
             }
             String kode_konter = MainApp.KonterList.get(Combox_KodeKonter_AddOrder.getSelectedIndex()).kode_konter;
             //String full[] = Combox_KodeBarang_AddOrder.getSelectedItem().toString().split(" ",2);
             String kode_barang = getKodeBarangCombox(Combox_KodeBarang_AddOrder);
             MainApp.ViewAllDataBarang(kode_barang);
-            model_viewdata.setValueAt(kode_konter, Table_Order.getModel().getRowCount(),0);
-            model_viewdata.setValueAt(kode_barang, Table_Order.getModel().getRowCount(),1);
-            model_viewdata.setValueAt(MainApp.getNamaBarang(kode_barang), Table_Order.getModel().getRowCount(),2);
-            model_viewdata.setValueAt(Integer.parseInt(TextField_JmlOrder.getText()), Table_Order.getModel().getRowCount(),3);
-            model_viewdata.setValueAt(MainApp.ViewDataBarang.stock, Table_Order.getModel().getRowCount(),4);
+            model_viewdata.setValueAt(kode_konter, 0, 0);
+            model_viewdata.setValueAt(kode_barang, 0, 1);
+            model_viewdata.setValueAt(MainApp.getNamaBarang(kode_barang), 0, 2);
+            model_viewdata.setValueAt(Integer.parseInt(TextField_JmlOrder.getText()), 0, 3);
+            model_viewdata.setValueAt(MainApp.ViewDataBarang.stock, 0, 4);
             // numberWaitingList  += 1;
             Table_Order.setModel(model_viewdata);    
             Table_Order.getTableHeader().setReorderingAllowed(false);
             Combox_KodeBarang_AddOrder.setSelectedItem("");
             TextField_JmlOrder.setText("");
+            
+            Combox_KodeBarang_AddOrder.requestFocus();
             
         } else {
             JOptionPane.showMessageDialog(null, "Empty fields detected ! Please fill up all fields");
@@ -1246,7 +1248,6 @@ public class sophieForm extends javax.swing.JFrame {
 
     private void Btn_Save_ExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Save_ExcelActionPerformed
         // TODO add your handling code here:
-//        System.out.println(Table_Excel.getModel().getValueAt(0,0));
         editUpdStockData = new ArrayList();
         // get the data from list
         for (int i = 0; i < Table_Excel.getModel().getRowCount(); i++){
@@ -1656,15 +1657,16 @@ public class sophieForm extends javax.swing.JFrame {
         if (selecteditem != -1){
             String [] columnNames = {"Kode Konter","Kode Barang","Nama Barang", "Jumlah", "Sisa Stok"};
             TableModel model_viewdata = new DefaultTableModel (columnNames, Table_Order.getModel().getRowCount() - 1);
+            int index = 0;
             for (int i = 0; i < Table_Order.getModel().getRowCount(); i ++){
-                int index;
-                if ( i > selecteditem) index = i - 1;
-                else index = i;
-                model_viewdata.setValueAt(Table_Order.getModel().getValueAt(i, 0),index,0);
-                model_viewdata.setValueAt(Table_Order.getModel().getValueAt(i, 1),index,1);
-                model_viewdata.setValueAt(Table_Order.getModel().getValueAt(i, 2),index,2);
-                model_viewdata.setValueAt(Table_Order.getModel().getValueAt(i, 3),index,3);
-                model_viewdata.setValueAt(Table_Order.getModel().getValueAt(i, 4),index,4);
+                if ( i != selecteditem){
+                    model_viewdata.setValueAt(Table_Order.getModel().getValueAt(i, 0),index,0);
+                    model_viewdata.setValueAt(Table_Order.getModel().getValueAt(i, 1),index,1);
+                    model_viewdata.setValueAt(Table_Order.getModel().getValueAt(i, 2),index,2);
+                    model_viewdata.setValueAt(Table_Order.getModel().getValueAt(i, 3),index,3);
+                    model_viewdata.setValueAt(Table_Order.getModel().getValueAt(i, 4),index,4);
+                    index++;
+                }
             }
             Table_Order.setModel(model_viewdata);
             Table_Order.setAutoCreateRowSorter(true);
