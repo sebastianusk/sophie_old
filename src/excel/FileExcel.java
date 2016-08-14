@@ -19,15 +19,24 @@ import java.io.IOException;
 import application.CariGudangReportData;
 import application.ComingOrderReportData;
 import application.MutationReportData;
+import java.util.Collections;
+import java.util.Comparator;
 import mysql.ItemReadyData;
 import mysql.KodeNamaKonter;
 import mysql.PopulerData;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFDataFormat;
 import org.apache.poi.hssf.usermodel.HSSFFont;
+import org.apache.poi.hssf.usermodel.HSSFHeader;
+import org.apache.poi.hssf.usermodel.HSSFPrintSetup;
+import org.apache.poi.hssf.usermodel.HeaderFooter;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.Footer;
+import org.apache.poi.ss.usermodel.Header;
+import org.apache.poi.ss.usermodel.PrintSetup;
 import org.apache.poi.ss.util.CellUtil;
 //import static org.apache.xmlbeans.impl.jam.internal.javadoc.JavadocRunner.start;
 //import static org.apache.xmlbeans.impl.schema.StscState.start;
@@ -93,9 +102,23 @@ public class FileExcel {
     public File excel_create_katalog_update(ArrayList<UpdKatalog> newKatalogUpdate){
         if (newKatalogUpdate.size() != 0){
             DateFormat time = new SimpleDateFormat("hhmm");
-            File ExcelKatalogDiff = new File ("KatalogDiff_"+ fmt.format(newKatalogUpdate.get(0).update_date_new) + "_" + time.format(newKatalogUpdate.get(0).update_date_new) + ".xls");
+            String fileName = "KatalogDiff_"+ fmt.format(newKatalogUpdate.get(0).update_date_new) + "_" + time.format(newKatalogUpdate.get(0).update_date_new) + ".xls";
+            File ExcelKatalogDiff = new File (fileName);
             HSSFWorkbook workbook   = new HSSFWorkbook();
             HSSFSheet sheet         = workbook.createSheet();
+            
+            // set page
+            sheet.getPrintSetup().setLandscape(true);
+            
+              //Set Header Information 
+            Header headerPage = sheet.getHeader();
+            headerPage.setCenter(HeaderFooter.page());
+            headerPage.setRight(fileName);
+
+            //Set Footer Information with Page Numbers
+            Footer footerPage = sheet.getFooter();
+            footerPage.setCenter("Page " + HeaderFooter.page() + " of " + 
+            HeaderFooter.numPages() );
             
             // prepare variable to edit the xls
             HSSFRow header;
@@ -122,7 +145,6 @@ public class FileExcel {
             cell.setCellValue("TABEL PERUBAHAN HARGA");
             sheet.addMergedRegion(new CellRangeAddress(1,1,1,5));
             
-             
             
             // create file info
             header  = sheet.createRow(3);
@@ -205,9 +227,23 @@ public class FileExcel {
     public File excel_create_diff_upd_stock(ArrayList <DiffUpdStock> diffinput, Date currtime){
         if (diffinput.size()!= 0){
             DateFormat time = new SimpleDateFormat("hhmm");
-            File ExcelDailyDiff = new File ("DailyDiff_"+ fmt.format(currtime) + "_" + time.format(currtime) +".xls");
+            String fileName = "DailyDiff_"+ fmt.format(currtime) + "_" + time.format(currtime) +".xls";
+            File ExcelDailyDiff = new File (fileName);
             HSSFWorkbook workbook   = new HSSFWorkbook();
             HSSFSheet sheet         = workbook.createSheet();
+
+            // set page
+            sheet.getPrintSetup().setLandscape(false);
+            
+              //Set Header Information 
+            Header headerPage = sheet.getHeader();
+            headerPage.setCenter(HeaderFooter.page());
+            headerPage.setRight(fileName);
+
+            //Set Footer Information with Page Numbers
+            Footer footerPage = sheet.getFooter();
+            footerPage.setCenter("Page " + HeaderFooter.page() + " of " + 
+            HeaderFooter.numPages() );
             
             // prepare variable to edit the xls
             HSSFRow header;
@@ -307,9 +343,23 @@ public class FileExcel {
     public File excel_create_order_pusat_coming(ArrayList<ComingOrderReportData> comingorder, Date comingorderdate){
         if (comingorder.size() != 0){
             DateFormat time = new SimpleDateFormat("hhmm");
-            File ExcelComingOrder = new File ("ComingOrder_" + fmt.format(comingorderdate)+ "_" + time.format(comingorderdate) + ".xls");
+            String fileName = "ComingOrder_" + fmt.format(comingorderdate)+ "_" + time.format(comingorderdate) + ".xls";
+            File ExcelComingOrder = new File (fileName);
             HSSFWorkbook workbook   = new HSSFWorkbook();
             HSSFSheet sheet         = workbook.createSheet();
+            
+            // set page
+            sheet.getPrintSetup().setLandscape(false);
+            
+              //Set Header Information 
+            Header headerPage = sheet.getHeader();
+            headerPage.setCenter(HeaderFooter.page());
+            headerPage.setRight(fileName);
+
+            //Set Footer Information with Page Numbers
+            Footer footerPage = sheet.getFooter();
+            footerPage.setCenter("Page " + HeaderFooter.page() + " of " + 
+            HeaderFooter.numPages() );
             
              // prepare variable to edit the xls
             HSSFRow header;
@@ -356,18 +406,14 @@ public class FileExcel {
             cell.setCellValue("Kode Barang");
             cell    = header.createCell(3);
             cell.setCellStyle(headerstyle);
-            cell.setCellValue("Nama Barang");
+            cell.setCellValue("Jumlah");
             cell    = header.createCell(4);
             cell.setCellStyle(headerstyle);
-            cell.setCellValue("Kategori");
+            cell.setCellValue("Nama Barang");
             cell    = header.createCell(5);
             cell.setCellStyle(headerstyle);
-            cell.setCellValue("Jumlah");
-            sheet.autoSizeColumn(1);
-            sheet.autoSizeColumn(2);
-            sheet.autoSizeColumn(3);
-            sheet.autoSizeColumn(4);
-            sheet.autoSizeColumn(5);
+            cell.setCellValue("Kategori");
+
             
             normalfont.setBoldweight(Font.BOLDWEIGHT_NORMAL);
             datastyle.setFont(normalfont);
@@ -376,8 +422,16 @@ public class FileExcel {
             datastyle.setBorderBottom(HSSFCellStyle.BORDER_THIN);
             datastyle.setBorderLeft(HSSFCellStyle.BORDER_THIN);
             datastyle.setBorderRight(HSSFCellStyle.BORDER_THIN);
-             
             
+            // Sorting
+            Collections.sort(comingorder, new Comparator<ComingOrderReportData>() {
+                    @Override
+                    public int compare(ComingOrderReportData data2, ComingOrderReportData data1)
+                    {
+                        return  data1.nama_barang.compareTo(data2.nama_barang);
+                    }
+                });
+             
             for (int i = 0; i < comingorder.size(); i++){
                 header  = sheet.createRow(i + 7);
                 cell    = header.createCell(1);
@@ -388,15 +442,22 @@ public class FileExcel {
                 cell.setCellValue(comingorder.get(i).kode_barang);
                 cell    = header.createCell(3);
                 cell.setCellStyle(datastyle);
-                cell.setCellValue(comingorder.get(i).nama_barang);
+                cell.setCellValue(comingorder.get(i).jumlah_barang);
                 cell    = header.createCell(4);
                 cell.setCellStyle(datastyle);
-                cell.setCellValue(comingorder.get(i).kategori);
+                cell.setCellValue(comingorder.get(i).nama_barang);
                 cell    = header.createCell(5);
                 cell.setCellStyle(datastyle);
-                cell.setCellValue(comingorder.get(i).jumlah_barang);
+                cell.setCellValue(comingorder.get(i).kategori);
+                
                 
             }
+            
+            sheet.autoSizeColumn(1);
+            sheet.autoSizeColumn(2);
+            sheet.autoSizeColumn(3);
+            sheet.autoSizeColumn(4);
+            sheet.autoSizeColumn(5);
             
             try{
                 // String pathname = "D:\\Document\\Dropbox\\sophie\\DB\\update_" + fmt.format(newKatalogUpdate.get(0).update_date_new) + ".xls";
@@ -418,9 +479,23 @@ public class FileExcel {
     
     public File excel_create_popular(ArrayList<PopulerData> PopulerItem, Date startdate, Date enddate){
         if (PopulerItem.size() != 0){
-            File ExcelPopular = new File ("PopularItem_" + fmt.format(startdate) + "-" + fmt.format(enddate) + ".xls");
+            String fileName = "PopularItem_" + fmt.format(startdate) + "-" + fmt.format(enddate) + ".xls";
+            File ExcelPopular = new File (fileName);
             HSSFWorkbook workbook   = new HSSFWorkbook();
             HSSFSheet sheet         = workbook.createSheet();
+            
+            // set page
+            sheet.getPrintSetup().setLandscape(false);
+            
+              //Set Header Information 
+            Header headerPage = sheet.getHeader();
+            headerPage.setCenter(HeaderFooter.page());
+            headerPage.setRight(fileName);
+
+            //Set Footer Information with Page Numbers
+            Footer footerPage = sheet.getFooter();
+            footerPage.setCenter("Page " + HeaderFooter.page() + " of " + 
+            HeaderFooter.numPages() );
             
              // prepare variable to edit the xls
             HSSFRow header;
@@ -525,9 +600,23 @@ public class FileExcel {
     public File excel_create_kirim_barang(ArrayList<ItemReadyData> ItemsReadyData, Date currentdate){
         if (ItemsReadyData.size() != 0){
             DateFormat time = new SimpleDateFormat("hhmm");
-            File ExcelKirimBarang = new File ("Kirim_" + fmt.format(currentdate) + "_" + time.format(currentdate) + "_konter_" + ItemsReadyData.get(0).kode_konter + ".xls");
+            String fileName = "Kirim_" + fmt.format(currentdate) + "_" + time.format(currentdate) + "_konter_" + ItemsReadyData.get(0).kode_konter + ".xls";
+            File ExcelKirimBarang = new File (fileName);
             HSSFWorkbook workbook   = new HSSFWorkbook();
             HSSFSheet sheet         = workbook.createSheet();
+            
+            // set page
+            sheet.getPrintSetup().setLandscape(true);
+            
+              //Set Header Information 
+            Header headerPage = sheet.getHeader();
+            headerPage.setCenter(HeaderFooter.page());
+            headerPage.setRight(fileName);
+
+            //Set Footer Information with Page Numbers
+            Footer footerPage = sheet.getFooter();
+            footerPage.setCenter("Page " + HeaderFooter.page() + " of " + 
+            HeaderFooter.numPages() );
             
              // prepare variable to edit the xls
             HSSFRow header;
@@ -578,10 +667,10 @@ public class FileExcel {
             cell.setCellValue("Kode Barang");
             cell    = header.createCell(2);
             cell.setCellStyle(headerstyle);
-            cell.setCellValue("Nama Barang");
+            cell.setCellValue("Jumlah");
             cell    = header.createCell(3);
             cell.setCellStyle(headerstyle);
-            cell.setCellValue("Jumlah");
+            cell.setCellValue("Nama Barang");
             cell    = header.createCell(4);
             cell.setCellStyle(headerstyle);
             cell.setCellValue("Kategori");
@@ -600,19 +689,13 @@ public class FileExcel {
             cell    = header.createCell(9);
             cell.setCellStyle(headerstyle);
             cell.setCellValue("Total Net");
-            sheet.autoSizeColumn(1);
-            sheet.autoSizeColumn(2);
-            sheet.autoSizeColumn(3);
-            sheet.autoSizeColumn(4);
-            sheet.autoSizeColumn(5);
-            sheet.autoSizeColumn(6);
-            sheet.autoSizeColumn(7);
-            sheet.autoSizeColumn(8);
-            sheet.autoSizeColumn(9);
+
             
                 
             normalfont.setBoldweight(Font.BOLDWEIGHT_NORMAL);
             datastyle.setFont(normalfont);
+            HSSFDataFormat df = workbook.createDataFormat();
+            datastyle.setDataFormat(df.getFormat("#,###"));
             datastyle.setAlignment(CellStyle.ALIGN_RIGHT);
             datastyle.setBorderTop(HSSFCellStyle.BORDER_THIN);
             datastyle.setBorderBottom(HSSFCellStyle.BORDER_THIN);
@@ -641,10 +724,10 @@ public class FileExcel {
                 cell.setCellValue(ItemsReadyData.get(j).kode_barang);
                 cell    = header.createCell(2);
                 cell.setCellStyle(datastyle);
-                cell.setCellValue(ItemsReadyData.get(j).nama_barang);
+                cell.setCellValue(ItemsReadyData.get(j).jumlah_barang);
                 cell    = header.createCell(3);
                 cell.setCellStyle(datastyle);
-                cell.setCellValue(ItemsReadyData.get(j).jumlah_barang);
+                cell.setCellValue(ItemsReadyData.get(j).nama_barang);
                 cell    = header.createCell(4);
                 cell.setCellStyle(datastyle);
                 cell.setCellValue(ItemsReadyData.get(j).kategori);
@@ -663,7 +746,17 @@ public class FileExcel {
                 cell    = header.createCell(9);
                 cell.setCellStyle(datastyle);
                 cell.setCellValue(total_net);
-            } 
+            }
+            
+            sheet.autoSizeColumn(1);
+            sheet.autoSizeColumn(2);
+            sheet.autoSizeColumn(3);
+            sheet.autoSizeColumn(4);
+            sheet.autoSizeColumn(5);
+            sheet.autoSizeColumn(6);
+            sheet.autoSizeColumn(7);
+            sheet.autoSizeColumn(8);
+            sheet.autoSizeColumn(9);
             
             datastyle.setFont(boldfont);
             header = sheet.createRow(j + 8);
@@ -698,13 +791,33 @@ public class FileExcel {
         // find number of counter, save in Counter Index
         if (!CariGudang.isEmpty()){
             DateFormat time = new SimpleDateFormat("hhmm");
-            File FileCariGudang = new File ("CariGudang_" + fmt.format(waktuprint) + "_" + time.format(waktuprint) + ".xls");
+            String fileName = "CariGudang_" + fmt.format(waktuprint) + "_" + time.format(waktuprint) + ".xls";
+            File FileCariGudang = new File (fileName);
                 
             HSSFWorkbook workbook;
             HSSFSheet sheet;
                 
             workbook = new HSSFWorkbook();
             sheet    = workbook.createSheet();
+
+            // set page
+            HSSFPrintSetup ps = sheet.getPrintSetup();
+            ps.setLandscape(true);
+            ps.setFitHeight((short)1);
+            ps.setFitWidth((short)1);
+            sheet.setFitToPage(true);
+            
+            
+              //Set Header Information 
+            Header headerPage = sheet.getHeader();
+            headerPage.setCenter(HeaderFooter.page());
+            headerPage.setRight(fileName);
+            
+
+            //Set Footer Information with Page Numbers
+            Footer footerPage = sheet.getFooter();
+            footerPage.setCenter("Page " + HeaderFooter.page() + " of " + 
+            HeaderFooter.numPages() );
 
             // prepare variable to edit the xls
             HSSFRow header;
@@ -760,13 +873,13 @@ public class FileExcel {
             cell.setCellValue("Kode Barang");
             cell    = header.createCell(4);
             cell.setCellStyle(headerstyle);
-            cell.setCellValue("Nama Barang");
+            cell.setCellValue("Jumlah");
             cell    = header.createCell(5);
             cell.setCellStyle(headerstyle);
-            cell.setCellValue("Kategori");
+            cell.setCellValue("Nama Barang");
             cell    = header.createCell(6);
             cell.setCellStyle(headerstyle);
-            cell.setCellValue("Jumlah");
+            cell.setCellValue("Kategori");
             cell    = header.createCell(7);
             cell.setCellStyle(headerstyle);
             cell.setCellValue("HargaTPG");
@@ -779,19 +892,12 @@ public class FileExcel {
             cell    = header.createCell(10);
             cell.setCellStyle(headerstyle);
             cell.setCellValue("Total Net");
-            sheet.autoSizeColumn(1);
-            sheet.autoSizeColumn(2);
-            sheet.autoSizeColumn(3);
-            sheet.autoSizeColumn(4);
-            sheet.autoSizeColumn(5);
-            sheet.autoSizeColumn(6);
-            sheet.autoSizeColumn(7);
-            sheet.autoSizeColumn(8);
-            sheet.autoSizeColumn(9);
-            sheet.autoSizeColumn(10);
+
             
             normalfont.setBoldweight(Font.BOLDWEIGHT_NORMAL);
             datastyle.setFont(normalfont);
+            HSSFDataFormat df = workbook.createDataFormat();
+            datastyle.setDataFormat(df.getFormat("#,###"));
             datastyle.setAlignment(CellStyle.ALIGN_RIGHT);
             datastyle.setBorderTop(HSSFCellStyle.BORDER_THIN);
             datastyle.setBorderBottom(HSSFCellStyle.BORDER_THIN);
@@ -825,13 +931,13 @@ public class FileExcel {
                 cell.setCellValue(CariGudang.get(j).kode_barang);
                 cell    = header.createCell(4);
                 cell.setCellStyle(datastyle);
-                cell.setCellValue(CariGudang.get(j).nama_barang);
+                cell.setCellValue(CariGudang.get(j).jumlah);
                 cell    = header.createCell(5);
                 cell.setCellStyle(datastyle);
-                cell.setCellValue(CariGudang.get(j).kategori);
+                cell.setCellValue(CariGudang.get(j).nama_barang);
                 cell    = header.createCell(6);
                 cell.setCellStyle(datastyle);
-                cell.setCellValue(CariGudang.get(j).jumlah);
+                cell.setCellValue(CariGudang.get(j).kategori);
                 cell    = header.createCell(7);
                 cell.setCellStyle(datastyle);
                 cell.setCellValue(CariGudang.get(j).harga_tpg);
@@ -856,6 +962,17 @@ public class FileExcel {
             cell.setCellStyle(datastyle);
             cell.setCellValue(sum_total_net);
             
+            sheet.autoSizeColumn(1);
+            sheet.autoSizeColumn(2);
+            sheet.autoSizeColumn(3);
+            sheet.autoSizeColumn(4);
+            sheet.autoSizeColumn(5);
+            sheet.autoSizeColumn(6);
+            sheet.autoSizeColumn(7);
+            sheet.autoSizeColumn(8);
+            sheet.autoSizeColumn(9);
+            sheet.autoSizeColumn(10);
+            
             try{
                 FileOutputStream out = new FileOutputStream(FileCariGudang);
                 workbook.write(out);
@@ -876,9 +993,23 @@ public class FileExcel {
     public File excel_create_dead_style(ArrayList<DeadStyleData> DSData, Date currentdate, int discDS){
         if (DSData.size() != 0){
             DateFormat time = new SimpleDateFormat("hhmm");
-            File ExcelDeadStyle= new File ("DeadStyle_" + fmt.format(currentdate) + "_" + time.format(currentdate) + ".xls");
+            String fileName = "DeadStyle_" + fmt.format(currentdate) + "_" + time.format(currentdate) + ".xls";
+            File ExcelDeadStyle= new File (fileName);
             HSSFWorkbook workbook   = new HSSFWorkbook();
             HSSFSheet sheet         = workbook.createSheet();
+            
+            // set page
+            sheet.getPrintSetup().setLandscape(false);
+            
+              //Set Header Information 
+            Header headerPage = sheet.getHeader();
+            headerPage.setCenter(HeaderFooter.page());
+            headerPage.setRight(fileName);
+
+            //Set Footer Information with Page Numbers
+            Footer footerPage = sheet.getFooter();
+            footerPage.setCenter("Page " + HeaderFooter.page() + " of " + 
+            HeaderFooter.numPages() );
             
              // prepare variable to edit the xls
             HSSFRow header;
@@ -1055,9 +1186,23 @@ public class FileExcel {
     public File excel_mutation_report(ArrayList<MutationReportData> datamutation, KodeNamaKonter konterinfo, Date Start, Date End, Date CurrentDate){
         if (datamutation.size() != 0){
             DateFormat time = new SimpleDateFormat("hhmm");
-            File ExcelMutation = new File ("Mutation_" + konterinfo.nama_konter + "_" + fmt.format(CurrentDate) + "_" + time.format(CurrentDate) + ".xls");
+            String fileName = "Mutation_" + konterinfo.nama_konter + "_" + fmt.format(CurrentDate) + "_" + time.format(CurrentDate) + ".xls";
+            File ExcelMutation = new File (fileName);
             HSSFWorkbook workbook   = new HSSFWorkbook();
             HSSFSheet sheet         = workbook.createSheet();
+            
+            // set page
+            sheet.getPrintSetup().setLandscape(false);
+            
+              //Set Header Information 
+            Header headerPage = sheet.getHeader();
+            headerPage.setCenter(HeaderFooter.page());
+            headerPage.setRight(fileName);
+
+            //Set Footer Information with Page Numbers
+            Footer footerPage = sheet.getFooter();
+            footerPage.setCenter("Page " + HeaderFooter.page() + " of " + 
+            HeaderFooter.numPages() );
             
              // prepare variable to edit the xls
             HSSFRow header;
