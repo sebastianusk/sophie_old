@@ -114,4 +114,33 @@ public class StringTools {
             return null;
         }
     }
+    
+    public ViewListData getViewList(String fileName){
+        //Create object of FileReader
+        try{
+            File txtfile = new File (fileName);
+            
+            if (txtfile.exists()){
+                FileReader inputFile = new FileReader(txtfile);
+                //Instantiate the BufferedReader Class
+                BufferedReader bufferReader = new BufferedReader(inputFile);
+                //Variable to hold the one line data
+                String line;
+                // Arraylist result
+                ViewListData output = new ViewListData();
+                output.listKodeBarang = new ArrayList<>();
+                // Read file line by line and print on the console
+                while ((line = bufferReader.readLine()) != null)   {
+                    output.listKodeBarang.add(line);
+                }
+                //Close the buffer reader
+                bufferReader.close();
+                return output;
+            }else
+                return null;
+        } catch (Exception e){
+            System.out.println("Error : " + e);
+            return null;
+        }
+    }
 }

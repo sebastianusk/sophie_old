@@ -909,6 +909,19 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jScrollPane6" min="-2" pref="637" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="JTextField_TotalNominal" min="-2" pref="180" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="Btn_SaveList_viewdata1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace pref="34" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -918,46 +931,41 @@
                                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="Combox_ViewData" pref="253" max="32767" attributes="0"/>
-                                  <Component id="Combox_ListViewData" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jButton1" max="32767" attributes="0"/>
-                                  <Component id="Btn_OK_ViewDat" min="-2" pref="55" max="-2" attributes="0"/>
+                                  <Component id="Combox_ViewData" pref="253" max="32767" attributes="0"/>
+                                  <Component id="TextField_input_view_data" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="Btn_Delete_Row" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="Btn_Clr_ViewData" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane6" min="-2" pref="637" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                      <Component id="Btn_OK_ViewDat" min="-2" pref="55" max="-2" attributes="0"/>
+                                  </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="JTextField_TotalNominal" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" attributes="0">
-                                              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="TextF_namalist_viewdata" min="-2" pref="198" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="Btn_SaveList_viewdata1" max="32767" attributes="0"/>
-                                          <Component id="Btn_SaveList_viewdata" max="32767" attributes="0"/>
-                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="Btn_Browse_View_Data" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="163" max="32767" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="Btn_Delete_Row" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="Btn_Clr_ViewData" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
+                      </Group>
+                  </Group>
+                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="Btn_Browse_DBF1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -968,8 +976,9 @@
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="Combox_ListViewData" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="TextField_input_view_data" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="Btn_Browse_View_Data" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -979,21 +988,22 @@
                           <Component id="Btn_Clr_ViewData" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Btn_Delete_Row" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace pref="48" max="32767" attributes="0"/>
                       <Component id="jScrollPane6" min="-2" pref="273" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="Btn_SaveList_viewdata" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="TextF_namalist_viewdata" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="31" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="JTextField_TotalNominal" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Btn_SaveList_viewdata1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="Btn_Browse_DBF1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1055,23 +1065,8 @@
             </Container>
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nama List            :"/>
+                <Property name="text" type="java.lang.String" value="Masukan List       :"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="Combox_ListViewData">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
-                  </StringArray>
-                </Property>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-              </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="jButton1">
               <Properties>
@@ -1079,21 +1074,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JTextField" name="TextF_namalist_viewdata">
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel9">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Nama List       : "/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="Btn_SaveList_viewdata">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Save"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Btn_SaveList_viewdataActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="Btn_Clr_ViewData">
@@ -1111,6 +1091,15 @@
             </Component>
             <Component class="javax.swing.JTextField" name="JTextField_TotalNominal">
             </Component>
+            <Component class="javax.swing.JButton" name="Btn_Browse_View_Data">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Browse"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Btn_Browse_View_DataActionPerformed"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="Btn_Browse_View_DataKeyPressed"/>
+              </Events>
+            </Component>
             <Component class="javax.swing.JButton" name="Btn_SaveList_viewdata1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Refresh"/>
@@ -1126,6 +1115,13 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Btn_Delete_RowActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="TextField_input_view_data">
+            </Component>
+            <Component class="javax.swing.JButton" name="Btn_Browse_DBF1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Browse"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

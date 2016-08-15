@@ -73,6 +73,10 @@ public class sophieForm extends javax.swing.JFrame {
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
+    
+    // 6. for view data
+    private String txtFilePath;
+    private File txtFile;
 
 
 
@@ -103,7 +107,7 @@ public class sophieForm extends javax.swing.JFrame {
         show_combobox_kodekonter_order();
         show_combobox_kodebarang_viewdata();
         show_combobox_kodekonter_transaction();
-        show_combobox_kodebarang_listview();
+//        show_combobox_kodebarang_listview();
         deadstylecount = 0;
         numberWaitingList = 0;
         setting_databarang = 0;
@@ -147,7 +151,7 @@ public class sophieForm extends javax.swing.JFrame {
 //            JOptionPane.showMessageDialog(null, "File Created");
             try {
                 Desktop.getDesktop().open(createdfile);
-                JOptionPane.showMessageDialog(null, "File Created");
+//                JOptionPane.showMessageDialog(null, "File Created");
             } catch (Exception e){
                 JOptionPane.showMessageDialog(null, e);
             }
@@ -188,16 +192,16 @@ public class sophieForm extends javax.swing.JFrame {
         textField2.addKeyListener(new List_Kode_Barang(Combox_ViewData, listBarang));
     }
     
-    public void show_combobox_kodebarang_listview(){
-        // for view data
-        Combox_ListViewData.setModel(new DefaultComboBoxModel(listView));
-        Combox_ListViewData.setSelectedIndex(-1);
-        Combox_ListViewData.setEditable(true);
-        JTextField textField2 = (JTextField) Combox_ListViewData.getEditor().getEditorComponent();
-        textField2.setFocusable(true);
-        textField2.setText("");
-        textField2.addKeyListener(new List_Kode_Barang(Combox_ListViewData, listView));
-    }
+//    public void show_combobox_kodebarang_listview(){
+//        // for view data
+//        Combox_ListViewData.setModel(new DefaultComboBoxModel(listView));
+//        Combox_ListViewData.setSelectedIndex(-1);
+//        Combox_ListViewData.setEditable(true);
+//        JTextField textField2 = (JTextField) Combox_ListViewData.getEditor().getEditorComponent();
+//        textField2.setFocusable(true);
+//        textField2.setText("");
+//        textField2.addKeyListener(new List_Kode_Barang(Combox_ListViewData, listView));
+//    }
     
     public void show_combobox_kodekonter_order(){
         // for konter data
@@ -390,16 +394,15 @@ public class sophieForm extends javax.swing.JFrame {
         jScrollPane6 = new javax.swing.JScrollPane();
         Table_ViewData = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
-        Combox_ListViewData = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
-        TextF_namalist_viewdata = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        Btn_SaveList_viewdata = new javax.swing.JButton();
         Btn_Clr_ViewData = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         JTextField_TotalNominal = new javax.swing.JTextField();
+        Btn_Browse_View_Data = new javax.swing.JButton();
         Btn_SaveList_viewdata1 = new javax.swing.JButton();
         Btn_Delete_Row = new javax.swing.JButton();
+        TextField_input_view_data = new javax.swing.JTextField();
+        Btn_Browse_DBF1 = new javax.swing.JButton();
         jPanel14 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
@@ -506,7 +509,7 @@ public class sophieForm extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(Table_Order);
 
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tambah Barang", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tambah Barang", 2, 0, new java.awt.Font("Arial", 1, 12))); // NOI18N
 
         jLabel1.setText("Kode Konter     :");
 
@@ -573,7 +576,7 @@ public class sophieForm extends javax.swing.JFrame {
                 .addGap(7, 7, 7))
         );
 
-        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Not Found", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Not Found", 2, 0, new java.awt.Font("Arial", 1, 12))); // NOI18N
 
         jLabel4.setText("Kode Order     :");
 
@@ -801,7 +804,7 @@ public class sophieForm extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Update Daily", jPanel3);
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Input", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Input", 0, 0, new java.awt.Font("Arial", 1, 12))); // NOI18N
         jPanel7.setToolTipText("");
 
         jLabel7.setText("Kode Konter   :");
@@ -952,23 +955,12 @@ public class sophieForm extends javax.swing.JFrame {
         });
         jScrollPane6.setViewportView(Table_ViewData);
 
-        jLabel8.setText("Nama List            :");
-
-        Combox_ListViewData.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabel8.setText("Masukan List       :");
 
         jButton1.setText("Load");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        jLabel9.setText("Nama List       : ");
-
-        Btn_SaveList_viewdata.setText("Save");
-        Btn_SaveList_viewdata.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_SaveList_viewdataActionPerformed(evt);
             }
         });
 
@@ -980,6 +972,18 @@ public class sophieForm extends javax.swing.JFrame {
         });
 
         jLabel10.setText("Total Nominal     : ");
+
+        Btn_Browse_View_Data.setText("Browse");
+        Btn_Browse_View_Data.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_Browse_View_DataActionPerformed(evt);
+            }
+        });
+        Btn_Browse_View_Data.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Btn_Browse_View_DataKeyPressed(evt);
+            }
+        });
 
         Btn_SaveList_viewdata1.setText("Refresh");
         Btn_SaveList_viewdata1.addActionListener(new java.awt.event.ActionListener() {
@@ -995,6 +999,8 @@ public class sophieForm extends javax.swing.JFrame {
             }
         });
 
+        Btn_Browse_DBF1.setText("Browse");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -1004,42 +1010,47 @@ public class sophieForm extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 637, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(JTextField_TotalNominal, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(Btn_SaveList_viewdata1)))
+                        .addContainerGap(34, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addGap(18, 18, 18))
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addGap(15, 15, 15)))
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(Combox_ViewData, 0, 253, Short.MAX_VALUE)
-                            .addComponent(Combox_ListViewData, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Btn_OK_ViewDat, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Btn_Delete_Row)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Btn_Clr_ViewData)
-                        .addGap(51, 51, 51))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                            .addComponent(Combox_ViewData, 0, 253, Short.MAX_VALUE)
+                            .addComponent(TextField_input_view_data))
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 637, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(jPanel5Layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(JTextField_TotalNominal))
-                                    .addGroup(jPanel5Layout.createSequentialGroup()
-                                        .addComponent(jLabel9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(TextF_namalist_viewdata, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(Btn_SaveList_viewdata1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(Btn_SaveList_viewdata, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addContainerGap(163, Short.MAX_VALUE))))
+                                .addComponent(Btn_OK_ViewDat, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Btn_Browse_View_Data)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(Btn_Delete_Row)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Btn_Clr_ViewData)
+                                .addGap(51, 51, 51))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(Btn_Browse_DBF1)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1047,8 +1058,9 @@ public class sophieForm extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(Combox_ListViewData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(TextField_input_view_data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Btn_Browse_View_Data))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -1056,24 +1068,24 @@ public class sophieForm extends javax.swing.JFrame {
                     .addComponent(Btn_OK_ViewDat)
                     .addComponent(Btn_Clr_ViewData)
                     .addComponent(Btn_Delete_Row))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Btn_SaveList_viewdata)
-                    .addComponent(TextF_namalist_viewdata, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGap(42, 42, 42)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(JTextField_TotalNominal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Btn_SaveList_viewdata1))
                 .addGap(27, 27, 27))
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(Btn_Browse_DBF1)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("View Data", jPanel5);
 
-        jPanel15.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        jPanel15.setBorder(javax.swing.BorderFactory.createEtchedBorder(0));
         jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel26.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
@@ -1463,86 +1475,43 @@ public class sophieForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_textfield_passwordKeyPressed
 
-    private void Btn_SaveList_viewdataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_SaveList_viewdataActionPerformed
-        // TODO add your handling code here:
-        // get the list name
-        String nama_list = TextF_namalist_viewdata.getText();
-        if (nama_list.contains(" ")|| nama_list.isEmpty()){
-            JOptionPane.showMessageDialog(null, "Save List name cannot be empty or contain spacebar");
-        } else {
-            MainApp.getListView();
-            int listfound = 0;
-            for (int i = 0; i < MainApp.ListViewData.size(); i ++){
-                if (MainApp.ListViewData.get(i).namaList.trim().equals(nama_list.trim())){
-                    listfound = 1;
-                    ViewListData ViewList = new ViewListData();
-                    ViewList.namaList = nama_list;
-                    ViewList.listKodeBarang = new ArrayList<>();
-                    for (int j = 0; j < Table_ViewData.getModel().getRowCount(); j ++){
-                        ViewList.listKodeBarang.add(Table_ViewData.getModel().getValueAt(j,0).toString());
-                    }
-                    MainApp.ListViewData.remove(i);
-                    MainApp.ListViewData.add(ViewList);
-                    MainApp.storeListView();
-                    MainApp.getListView();
-                    setVectorViewList();
-                    break;
-                }
-            }
-            if(listfound == 0){
-                ViewListData ViewList = new ViewListData();
-                ViewList.namaList = nama_list;
-                ViewList.listKodeBarang = new ArrayList<>();
-                for (int i = 0; i < Table_ViewData.getModel().getRowCount(); i ++){
-                    ViewList.listKodeBarang.add(Table_ViewData.getModel().getValueAt(i,0).toString());
-                }
-                MainApp.ListViewData.add(ViewList);
-                MainApp.storeListView();
-                MainApp.getListView();
-                setVectorViewList();
-                JOptionPane.showMessageDialog(null, "List Berhasil Tersimpan");
-            }else {
-                JOptionPane.showMessageDialog(null, "List Berhasil Diupdate");
-            }
-        }
-        MainApp.getListView();
-        setVectorViewList();
-        
-    }//GEN-LAST:event_Btn_SaveList_viewdataActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String [] columnNamesdumy = {"Kode Barang","Nama Barang", "Kategori", "Harga TPG", "Diskon Member", "Stok"};
-        TableModel model_viewdata = new DefaultTableModel (columnNamesdumy, 0);
-        Table_ViewData.setModel(model_viewdata);
-        String list_name = Combox_ListViewData.getSelectedItem().toString();
-        TextF_namalist_viewdata.setText(list_name);
-        for (int i = 0; i < MainApp.ListViewData.size(); i++){
-            if (MainApp.ListViewData.get(i).namaList.trim().equals(list_name)){
-                for (int j = 0; j < MainApp.ListViewData.get(i).listKodeBarang.size(); j++){
-                    String kode_barang = MainApp.ListViewData.get(i).listKodeBarang.get(j);
-                    MainApp.ViewAllDataBarang(kode_barang);
-                    String [] columnNames = {"Kode Barang","Nama Barang", "Kategori", "Harga TPG", "Diskon Member", "Stok"};
-                    model_viewdata = new DefaultTableModel (columnNames, Table_ViewData.getModel().getRowCount() + 1);
-                    for(int k = 0; k < Table_ViewData.getModel().getRowCount(); k++){
-                        model_viewdata.setValueAt(Table_ViewData.getModel().getValueAt(k, 0),k,0);
-                        model_viewdata.setValueAt(Table_ViewData.getModel().getValueAt(k, 1),k,1);
-                        model_viewdata.setValueAt(Table_ViewData.getModel().getValueAt(k, 2),k,2);
-                        model_viewdata.setValueAt(Table_ViewData.getModel().getValueAt(k, 3),k,3);
-                        model_viewdata.setValueAt(Table_ViewData.getModel().getValueAt(k, 4),k,4);
-                        model_viewdata.setValueAt(Table_ViewData.getModel().getValueAt(k, 5),k,5);
-                    }   
-                    model_viewdata.setValueAt(kode_barang,Table_ViewData.getModel().getRowCount(), 0);
-                    model_viewdata.setValueAt(MainApp.ViewDataBarang.nama_barang, Table_ViewData.getModel().getRowCount(), 1);
-                    model_viewdata.setValueAt(MainApp.ViewDataBarang.kategori, Table_ViewData.getModel().getRowCount(), 2);
-                    model_viewdata.setValueAt(MainApp.ViewDataBarang.harga_tpg, Table_ViewData.getModel().getRowCount(), 3);
-                    model_viewdata.setValueAt(MainApp.ViewDataBarang.disc_member, Table_ViewData.getModel().getRowCount(), 4);
-                    model_viewdata.setValueAt(MainApp.ViewDataBarang.stock, Table_ViewData.getModel().getRowCount(), 5);
-                    Table_ViewData.setModel(model_viewdata);
-                    Table_ViewData.setAutoCreateRowSorter(true);
-                }
+        
+        if (txtFile != null) {
+            String [] columnNamesdumy = {"Kode Barang","Nama Barang", "Kategori", "Harga TPG", "Diskon Member", "Stok"};
+            TableModel model_viewdata = new DefaultTableModel (columnNamesdumy, 0);
+            Table_ViewData.setModel(model_viewdata);
+            ViewListData listData = MainApp.readListViewData(txtFilePath);
+    //        TextF_namalist_viewdata.setText(list_name);
+            for (int i = 0; i < listData.listKodeBarang.size(); i++){
+                String kode_barang = listData.listKodeBarang.get(i);
+                MainApp.ViewAllDataBarang(kode_barang);
+                String [] columnNames = {"Kode Barang","Nama Barang", "Kategori", "Harga TPG", "Diskon Member", "Stok"};
+                model_viewdata = new DefaultTableModel (columnNames, Table_ViewData.getModel().getRowCount() + 1);
+                for(int k = 0; k < Table_ViewData.getModel().getRowCount(); k++){
+                    model_viewdata.setValueAt(Table_ViewData.getModel().getValueAt(k, 0),k,0);
+                    model_viewdata.setValueAt(Table_ViewData.getModel().getValueAt(k, 1),k,1);
+                    model_viewdata.setValueAt(Table_ViewData.getModel().getValueAt(k, 2),k,2);
+                    model_viewdata.setValueAt(Table_ViewData.getModel().getValueAt(k, 3),k,3);
+                    model_viewdata.setValueAt(Table_ViewData.getModel().getValueAt(k, 4),k,4);
+                    model_viewdata.setValueAt(Table_ViewData.getModel().getValueAt(k, 5),k,5);
+                }   
+                model_viewdata.setValueAt(kode_barang,Table_ViewData.getModel().getRowCount(), 0);
+                model_viewdata.setValueAt(MainApp.ViewDataBarang.nama_barang, Table_ViewData.getModel().getRowCount(), 1);
+                model_viewdata.setValueAt(MainApp.ViewDataBarang.kategori, Table_ViewData.getModel().getRowCount(), 2);
+                model_viewdata.setValueAt(MainApp.ViewDataBarang.harga_tpg, Table_ViewData.getModel().getRowCount(), 3);
+                model_viewdata.setValueAt(MainApp.ViewDataBarang.disc_member, Table_ViewData.getModel().getRowCount(), 4);
+                model_viewdata.setValueAt(MainApp.ViewDataBarang.stock, Table_ViewData.getModel().getRowCount(), 5);
+                Table_ViewData.setModel(model_viewdata);
+                Table_ViewData.setAutoCreateRowSorter(true);
             }
+        } else  {
+            JOptionPane.showMessageDialog(null, "Error: File not found");
         }
+        
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void Combox_KodeBarang_AddOrderKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Combox_KodeBarang_AddOrderKeyPressed
@@ -1686,6 +1655,23 @@ public class sophieForm extends javax.swing.JFrame {
         Table_Order.getTableHeader().setReorderingAllowed(false);
     }//GEN-LAST:event_Btn_Clear_OrderActionPerformed
 
+    private void Btn_Browse_View_DataKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_Browse_View_DataKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Btn_Browse_View_DataKeyPressed
+
+    private void Btn_Browse_View_DataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Browse_View_DataActionPerformed
+        // TODO add your handling code here:
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("txt","TXT");
+        chooser.setFileFilter(filter);
+        int returnVal = chooser.showOpenDialog(null);
+        if (returnVal == JFileChooser.APPROVE_OPTION ){
+            txtFile = chooser.getSelectedFile();
+            txtFilePath = txtFile.getAbsolutePath();
+            TextField_input_view_data.setText(txtFilePath);
+        }
+    }//GEN-LAST:event_Btn_Browse_View_DataActionPerformed
+
 
 //
     /**
@@ -1731,7 +1717,9 @@ public class sophieForm extends javax.swing.JFrame {
     private javax.swing.JButton Btn_AddItem_Excel;
     private javax.swing.JButton Btn_Add_Order;
     private javax.swing.JButton Btn_Browse_DBF;
+    private javax.swing.JButton Btn_Browse_DBF1;
     private javax.swing.JButton Btn_Browse_Excel;
+    private javax.swing.JButton Btn_Browse_View_Data;
     private javax.swing.JButton Btn_Clear_Order;
     private javax.swing.JButton Btn_Clr_ViewData;
     private javax.swing.JButton Btn_Delete_Row;
@@ -1742,7 +1730,6 @@ public class sophieForm extends javax.swing.JFrame {
     private javax.swing.JButton Btn_OK_ViewDat;
     private javax.swing.JButton Btn_Print_CariGudang;
     private javax.swing.JButton Btn_Print_Order1;
-    private javax.swing.JButton Btn_SaveList_viewdata;
     private javax.swing.JButton Btn_SaveList_viewdata1;
     private javax.swing.JButton Btn_Save_DBF;
     private javax.swing.JButton Btn_Save_Excel;
@@ -1754,7 +1741,6 @@ public class sophieForm extends javax.swing.JFrame {
     private javax.swing.JComboBox Combox_KodeKonter_AddOrder;
     private javax.swing.JComboBox Combox_KodeKonter_Mutasi;
     private javax.swing.JComboBox Combox_Konter_Kirim;
-    private javax.swing.JComboBox<String> Combox_ListViewData;
     private javax.swing.JComboBox Combox_ViewData;
     private org.jdesktop.swingx.JXDatePicker DatePick_Akhir_Trans;
     private org.jdesktop.swingx.JXDatePicker DatePick_Mulai_Trans;
@@ -1764,11 +1750,11 @@ public class sophieForm extends javax.swing.JFrame {
     private javax.swing.JTable Table_Order;
     private javax.swing.JTable Table_Transaction;
     private javax.swing.JTable Table_ViewData;
-    private javax.swing.JTextField TextF_namalist_viewdata;
     private javax.swing.JTextField TextField_DBF_path;
     private javax.swing.JTextField TextField_JmlOrder;
     private javax.swing.JTextField TextField_Jumlah_NotFound;
     private javax.swing.JTextField TextField_KodeOrder_NotFound;
+    private javax.swing.JTextField TextField_input_view_data;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1784,7 +1770,6 @@ public class sophieForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;

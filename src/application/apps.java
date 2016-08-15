@@ -488,4 +488,10 @@ public class apps {
         
     }
 
+    public ViewListData readListViewData(String txtFilePath) {
+        StringTools tools = new StringTools();
+        return tools.getViewList(txtFilePath);
+        
+    }
+
 }
